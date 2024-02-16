@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements ActionListener {
     int appleY;
     char direction = 'R';
     boolean running = false;
+
     Timer timer;
     Random random;
 
@@ -45,10 +46,10 @@ public class GamePanel extends JPanel implements ActionListener {
     public void drawn(Graphics g) {
         if (running) {
 
-//            for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-//                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-//                g.drawLine(0, i * UNIT_SIZE, i * SCREEN_WIDTH, i * UNIT_SIZE);
-//            }
+            for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
+                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
+                g.drawLine(0, i * UNIT_SIZE, i * SCREEN_WIDTH, i * UNIT_SIZE);
+            }
             g.setColor(Color.red);
             g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
@@ -64,7 +65,8 @@ public class GamePanel extends JPanel implements ActionListener {
             g.setColor(Color.red);
             g.setFont(new Font("JetBrains Mono", Font.BOLD, 35));
             FontMetrics metrics = getFontMetrics(g.getFont());
-            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten)) / 2, g.getFont().getSize());
+            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten)) / 2,
+                    g.getFont().getSize());
         } else {
             gameOver(g);
         }
@@ -107,26 +109,26 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void checkCollisions() {
 
-        //checa se bateu no corpo
+        // checa se bateu no corpo
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i]) && (y[0] == y[i])) {
                 running = false;
             }
 
-            //checa se bateu na borda da esquerda
+            // checa se bateu na borda da esquerda
             if (x[0] < 0) {
                 running = false;
             }
 
-            //checa se bateu na borda da esquerda
+            // checa se bateu na borda da esquerda
             if (x[0] > SCREEN_WIDTH) {
                 running = false;
             }
-            //checa se bateu na borda da esquerda
+            // checa se bateu na borda da esquerda
             if (y[0] < 0) {
                 running = false;
             }
-            //checa se bateu na borda da esquerda
+            // checa se bateu na borda da esquerda
             if (y[0] > SCREEN_HEIGHT) {
                 running = false;
             }
@@ -138,7 +140,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void gameOver(Graphics g) {
-        //Texto de Game Over
+        // Texto de Game Over
         g.setColor(Color.red);
         g.setFont(new Font("JetBrains Mono", Font.BOLD, 75));
         FontMetrics metrics = getFontMetrics(g.getFont());
